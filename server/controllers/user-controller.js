@@ -36,11 +36,11 @@ class UserController {
     }
     async getUsers(req, res, next) {
         try {
-
+            res.json([1,2,3,4])
         } catch (e) {
 
         }
     }
 }
 
-module.exports = new UserController
+module.exports = new UserController()
