@@ -48,14 +48,18 @@ class UserController {
     }
     async refresh(req, res, next) {
         try {
-
+            const {refreshToken} = res.cookies
+            const userData = await userService.refresh(refreshToken)
+            res.cookie('refreshToken', userData.refreshToken, {maxAge: 2592000000, httpOnly: true})
+            return res.json(userData)
         } catch (e) {
             next(e)
         }
     }
     async getUsers(req, res, next) {
         try {
-            res.json([1,2,3,4])
+            const users = await userService.getAllUsers()
+            return res.json(users)
         } catch (e) {
             next(e)
         }
